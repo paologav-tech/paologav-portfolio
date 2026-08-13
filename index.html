@@ -70,8 +70,26 @@
                 width:100%;height:260px;border-radius:12px;background:linear-gradient(135deg,#eef2ff,#fff);display:flex;align-items:center;justify-content:center;color:var(--muted);font-weight:600}
             .photo small{display:block;font-size:0.85rem}
 
+            .hero-photo {
+                width:100%;
+                max-width:360px;
+                aspect-ratio:4 / 5;
+                overflow:hidden;
+                border-radius:12px;
+                background:linear-gradient(135deg,#eef2ff,#fff);
+            }
+
+            .hero-photo img {
+                display:block;
+                width:100%;
+                height:100%;
+                object-fit:cover;
+                object-position:center 75%;
+            }
+
             /* Sections */
-            .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
+            .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:0px}
+            h2{margin:0}
             .projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:16px;
                 animation: cardFadeIn 1.0s ease forwards; 
                 animation-timeline: view();
@@ -92,7 +110,12 @@
 
             @media (max-width:880px){
                 .hero{grid-template-columns:1fr;}
-                .hero .photo{height:220px}
+                .hero .hero-photo{
+                    width:min(100%, 280px);
+                    max-width:280px;
+                    margin:0 auto;
+                    height:auto;
+                }
                 .wrap{padding:16px;margin:24px auto}
             }
 
@@ -162,18 +185,15 @@
                         </div>
                     </div>
                     <div>
-                        <div class="photo">
-                            <div>
-                                <div style="font-size:1.05rem">Image Placeholder</div>
-                                <small class="muted">Add a portrait or hero image here</small>
-                            </div>
+                        <div class="hero-photo">
+                            <img src="assets/images/paolo_gavino_picture.jpg" alt="Paolo Gaviño" />
                         </div>
                     </div>
                 </section>
 
                 <section id="about" class="card" style="margin-top:18px">
                     <h2>About</h2>
-                    <div class="grid-2" style="margin-top:12px">
+                    <div class="grid-2">
                         <div>
                             <p class="muted">Write a short, engaging bio here. Mention your specialties, the kind of problems you solve, preferred technologies, and what you're looking for. Keep it concise and personable.</p>
                             <p style="margin-top:10px"><strong>Quick details</strong></p>
