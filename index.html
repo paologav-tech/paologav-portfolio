@@ -76,7 +76,10 @@
                 animation: cardFadeIn 1.0s ease forwards; 
                 animation-timeline: view();
                 animation-range: entry 0% cover 50%;}
-            .project{padding:14px;border-radius:12px;background:linear-gradient(180deg,#ffffff,#fbfdff);box-shadow:0 6px 18px rgba(15,23,42,0.04)}
+            .project{padding:14px;border-radius:12px;background:linear-gradient(180deg,#ffffff,#fbfdff);box-shadow:0 6px 18px rgba(15,23,42,0.04);
+                animation: cardFadeIn 1.0s ease forwards; 
+                animation-timeline: view();
+                animation-range: entry 0% cover 50%;}
             .project .thumb{height:120px;border-radius:8px;background:#f3f4f6;display:flex;align-items:center;justify-content:center;color:var(--muted);font-weight:600}
             .muted{color:var(--muted)}
 
@@ -200,7 +203,7 @@
                     </div>
                 </section>
 
-                <section id="projects" style="margin-top:18px">
+                <section id="projects" class="card" style="margin-top:18px">
                     <h2 style="margin-bottom:8px">Selected Projects</h2>
                     <div class="projects">
                         <article class="project">
