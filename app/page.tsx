@@ -1,24 +1,36 @@
 "use client";
 
 import emailjs from "@emailjs/browser";
+import Image from "next/image";
 import { FormEvent, useEffect, useState } from "react";
 
 export default function Home() {
   useEffect(() => {
-    const revealItems = document.querySelectorAll(".reveal");
+    const revealItems = document.querySelectorAll<HTMLElement>(".reveal");
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          entry.target.classList.toggle("visible", entry.isIntersecting);
-        });
-      },
-      { threshold: 0.4 }
-    );
+    const updateReveal = () => {
+      const viewportHeight = window.innerHeight;
+      const triggerStart = viewportHeight * 0.2;
+      const triggerEnd = viewportHeight * 0.35;
 
-    revealItems.forEach((item) => observer.observe(item));
+      revealItems.forEach((item) => {
+        const rect = item.getBoundingClientRect();
+        const distance = triggerStart - rect.top;
+        const range = triggerStart - triggerEnd;
+        const progress = Math.min(Math.max(distance / range, 0), 1);
 
-    return () => observer.disconnect();
+        item.style.setProperty("--progress", progress.toFixed(3));
+      });
+    };
+
+    updateReveal();
+    window.addEventListener("scroll", updateReveal, { passive: true });
+    window.addEventListener("resize", updateReveal);
+
+    return () => {
+      window.removeEventListener("scroll", updateReveal);
+      window.removeEventListener("resize", updateReveal);
+    };
   }, []);
 
   const [formData, setFormData] = useState({
@@ -73,9 +85,7 @@ export default function Home() {
           <div>
             <h1>Hi, I&apos;m Paolo Gaviño.</h1>
             <p className="muted">
-              A sleek, modern portfolio template to showcase your work, skills,
-              and contact info. Replace the placeholders with your details and
-              images.
+              I believe that data can tell stories, and I enjoy uncovering those stories to help people make informed decisions.
             </p>
 
             <div className="cta">
@@ -101,22 +111,34 @@ export default function Home() {
 
           <div>
             <div className="hero-photo">
-              <img
+              <Image
                 src="/paolo_gavino_picture.png"
                 alt="Paolo Gaviño"
+                width={300}
+                height={300}
               />
             </div>
           </div>
         </section>
 
         <section id="about" className="card reveal" style={{ marginTop: "18px" }}>
-          <h2>About</h2>
-          <div className="grid-2">
+          
+          <div className="grid-2" style={{ gridTemplateColumns: "360px 1fr", gap: "18px" }}>
+            <div className="photo" style={{ objectPosition: "center center" }}>
+              <Image
+                src="/mapua_university_logo.png"
+                alt="Paolo Gaviño"
+                width={250}
+                height={250}
+              />
+            </div>
             <div>
+              <h2>About</h2>
               <p className="muted">
-                Write a short, engaging bio here. Mention your specialties, the
-                kind of problems you solve, preferred technologies, and what
-                you&apos;re looking for. Keep it concise and personable.
+                I&apos;m a final-year BS-MS Information Technology student interested in <strong>data analytics, software quality, and web development</strong>.<br/><br/>
+                I enjoy working with data, finding insights, and building solutions that make information easier to understand and use.<br/><br/>
+                Primarily, I work with <strong>Python, SQL, Power BI, Excel, Java, Next.js, HTML, CSS, and TypeScript</strong>, with experience in software testing, application development, and research.<br/><br/>
+                Currently I am seeking a <strong>full-time opportunity, including remote roles</strong>, in <strong>Data Analytics, Reporting, Web Development, or other technology-driven positions</strong> where I can continue learning and make an impact.
               </p>
 
               <p style={{ marginTop: "10px" }}>
@@ -131,9 +153,7 @@ export default function Home() {
               </ul>
             </div>
 
-            <div>
-              <div className="photo">About Image Placeholder</div>
-            </div>
+            
           </div>
         </section>
 
@@ -150,7 +170,7 @@ export default function Home() {
 
             <div className="card">
               <strong>Frontend Development</strong>
-              <div className="muted">HTML, CSS, Java, JavaScript, PHP</div>
+              <div className="muted">HTML, CSS, Java, JavaScript</div>
             </div>
 
             <div className="card">
