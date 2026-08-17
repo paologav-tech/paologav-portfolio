@@ -71,6 +71,7 @@ export default function Home() {
 
   return (
     <div className="wrap">
+      <title>Paolo Gaviño - Portfolio </title>
       <header>
         <div className="brand">Personal Portfolio</div>
         <nav>
